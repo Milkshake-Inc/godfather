@@ -1,5 +1,11 @@
 ﻿using Data.Interfaces;
-using GTANetworkServer;
+using GrandTheftMultiplayer.Server;
+using GrandTheftMultiplayer.Server.API;
+using GrandTheftMultiplayer.Server.Elements;
+using GrandTheftMultiplayer.Server.Constant;
+using GrandTheftMultiplayer.Server.Managers;
+using GrandTheftMultiplayer.Shared;
+using GrandTheftMultiplayer.Shared.Math;
 using System;
 using System.Linq;
 using System.Text;
@@ -122,7 +128,7 @@ namespace TheGodfatherGM.Server.User
         {
             string SessionID = Account.SessionID;
             if (SessionID != null) return SessionID;
-            
+
             StringBuilder session_id = new StringBuilder("");
             Random Random = new Random();
             char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-".ToCharArray();
@@ -133,7 +139,7 @@ namespace TheGodfatherGM.Server.User
             }
 
             Client.setData("session_id", session_id);
-            Account.SessionID = session_id.ToString();               
+            Account.SessionID = session_id.ToString();
             return session_id.ToString();
         }
     }

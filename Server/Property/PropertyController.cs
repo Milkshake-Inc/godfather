@@ -1,8 +1,13 @@
 ﻿using TheGodfatherGM.Data.Attributes;
 using TheGodfatherGM.Data.Enums;
 using TheGodfatherGM.Data.Extensions;
-using GTANetworkServer;
-using GTANetworkShared;
+using GrandTheftMultiplayer.Server;
+using GrandTheftMultiplayer.Server.API;
+using GrandTheftMultiplayer.Server.Elements;
+using GrandTheftMultiplayer.Server.Constant;
+using GrandTheftMultiplayer.Server.Managers;
+using GrandTheftMultiplayer.Shared;
+using GrandTheftMultiplayer.Shared.Math;
 using System.Collections.Generic;
 using System.Linq;
 using TheGodfatherGM.Data;
@@ -195,7 +200,7 @@ namespace TheGodfatherGM.Server.Property
             if (account == null) return;
             if (player.isInVehicle) return;
 
-           
+
             if (!PropertyData.Enterable)
             {
                 API.shared.sendNotificationToPlayer(player, "~g~Server: ~w~You cannot enter this property.");

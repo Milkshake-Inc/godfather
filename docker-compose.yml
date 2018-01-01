@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    restart: on-failure
+    volumes:
+      - "db_data:/var/lib/mysql"
+      - "./Server/_sql-template/godfather.sql:/docker-entrypoint-initdb.d/init.sql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: godfather
+      MYSQL_USER: godfather
+      MYSQL_PASSWORD: godfather
+    ports:
+      - "3366:3306"
+
+  build:
+    image: mono:latest
+    volumes:
+      - ".:/build"
+    command: >
+      bash -c "cd /build &&
+               nuget restore &&
+               msbuild 'The Godfather GM.sln'"
+
+  server:
+    image: milkshakeio/gtamp:latest
+    restart: on-failure
+    volumes:
+      - "./settings.xml:/server/settings.xml"
+      - "./Server:/server/resources/godfather"
+    depends_on:
+      - db
+    ports:
+      - "4499:4499/udp"
+
+volumes:
+  db_data:

@@ -1,11 +1,15 @@
-﻿using GTANetworkServer;
+﻿using GrandTheftMultiplayer.Server;
+using GrandTheftMultiplayer.Server.API;
+using GrandTheftMultiplayer.Server.Elements;
+using GrandTheftMultiplayer.Server.Constant;
+using GrandTheftMultiplayer.Server.Managers;
+using GrandTheftMultiplayer.Shared;
+using GrandTheftMultiplayer.Shared.Math;
 using System.Collections.Generic;
 using System.Linq;
-using GTANetworkShared;
 using TheGodfatherGM.Server.DBManager;
 using TheGodfatherGM.Server.User;
 using TheGodfatherGM.Server.Characters;
-
 
 namespace TheGodfatherGM.Server.Vehicles
 {
@@ -31,12 +35,12 @@ namespace TheGodfatherGM.Server.Vehicles
         }
 
 
-        private void OnPlayerExitVehicle(Client player, NetHandle vehicle)
+        private void OnPlayerExitVehicle(Client player, NetHandle vehicle, int seat)
         {
             API.triggerClientEvent(player, "hide_vehicle_hud");
         }
 
-        private void OnPlayerEnterVehicle(Client player, NetHandle vehicle)
+        private void OnPlayerEnterVehicle(Client player, NetHandle vehicle, int seat)
         {
             AccountController account = player.getData("ACCOUNT");
             if (account == null) return;

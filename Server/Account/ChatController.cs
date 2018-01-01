@@ -1,4 +1,10 @@
-﻿using GTANetworkServer;
+﻿using GrandTheftMultiplayer.Server;
+using GrandTheftMultiplayer.Server.API;
+using GrandTheftMultiplayer.Server.Elements;
+using GrandTheftMultiplayer.Server.Constant;
+using GrandTheftMultiplayer.Server.Managers;
+using GrandTheftMultiplayer.Shared;
+using GrandTheftMultiplayer.Shared.Math;
 using System.Collections.Generic;
 using TheGodfatherGM.Server.Admin;
 using TheGodfatherGM.Server.Characters;
@@ -33,7 +39,7 @@ namespace TheGodfatherGM.Server
             {
                 if (account == null) ce.Cancel = true;
             }
-            
+
         }
 
         public static void LoginMessages(AccountController account)
@@ -75,7 +81,7 @@ namespace TheGodfatherGM.Server
             sendProxMessage(player, 7.5f, "~#C2A2DA~", account.CharacterController.FormatName + " " + msg);
         }
 
-        [Command("do", GreedyArg = true)] // do command 
+        [Command("do", GreedyArg = true)] // do command
         public void DO_Command(Client player, string message)
         {
             AccountController account =  player.getData("ACCOUNT");
@@ -83,7 +89,7 @@ namespace TheGodfatherGM.Server
             sendProxMessage(player, 15.0f, "~#C2A2DA~", "* " + message + " (( " + account.CharacterController.FormatName + " ))");
         }
 
-        [Command("dolow", GreedyArg = true)] // do command 
+        [Command("dolow", GreedyArg = true)] // do command
         public void DOLow_Command(Client player, string message)
         {
             AccountController account =  player.getData("ACCOUNT");
@@ -124,7 +130,7 @@ namespace TheGodfatherGM.Server
                 API.sendChatMessageToPlayer(c, "~#FFFFFF~", "(( " + account.CharacterController.FormatName + ": " + msg + " ))");
             }
         }
-        
+
         [Command("pm", GreedyArg = true)]
         public void PmCommand(Client player, Client targetPlayer, string message)
         {

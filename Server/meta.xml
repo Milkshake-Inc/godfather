@@ -2,7 +2,7 @@
 
   <info name="The Godfather GM" author="Jingles" type="gamemode"/>
   <script src="bin/Debug/The Godfather GM.dll" type="server" lang="compiled" />
-  
+
   <settings>
     <setting name="web_server" value="localhost" default="localhost"/>
     <setting name="web_server_port" value="5000" default="5000"/>
@@ -10,10 +10,10 @@
     <setting name="auth_listening_port" value="3001" default="3001"/>
     <setting name="web_rtc_server" value="http://localhost" default="http://localhost"/> <!-- WebRTC requires https when hosted -->
     <setting name="web_rtc_port" value="5000" default="5000"/>
-    <setting name="database_server" value="localhost" default="localhost"/>
+    <setting name="database_server" value="db" default="localhost"/>
     <setting name="database_port" value="3306" default="3306" />
     <setting name="database_user" value="godfather" default="godfather"/>
-    <setting name="database_password" value="" default=""/>
+    <setting name="database_password" value="godfather" default=""/>
     <setting name="database_using_ssl" value="false" default="false" />
     <setting name="database_ssl_pfx_file" value="" default="" />
     <setting name="database_ssl_pfx_password" value="" default="" />

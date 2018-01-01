@@ -38,7 +38,7 @@ CREATE TABLE `aspnetuserclaims` (
   `UserId` varchar(127) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_AspNetUserClaims_UserId` (`UserId`),
-  CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -52,7 +52,7 @@ CREATE TABLE `aspnetuserlogins` (
   `ProviderKey` varchar(127) NOT NULL,
   PRIMARY KEY (`UserId`),
   UNIQUE KEY `AK_AspNetUserLogins_LoginProvider_ProviderKey` (`LoginProvider`,`ProviderKey`),
-  CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -65,14 +65,14 @@ CREATE TABLE `aspnetuserroles` (
   PRIMARY KEY (`UserId`,`RoleId`),
   KEY `IX_AspNetUserRoles_RoleId` (`RoleId`),
   CONSTRAINT `FK_AspNetUserRoles_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `aspnetusers`
+-- Table structure for `AspNetUsers`
 -- ----------------------------
-DROP TABLE IF EXISTS `aspnetusers`;
-CREATE TABLE `aspnetusers` (
+DROP TABLE IF EXISTS `AspNetUsers`;
+CREATE TABLE `AspNetUsers` (
   `Id` varchar(127) NOT NULL,
   `AccessFailedCount` int(11) NOT NULL,
   `ConcurrencyStamp` longtext,
@@ -113,10 +113,10 @@ CREATE TABLE `aspnetusertokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `ban`
+-- Table structure for `Ban`
 -- ----------------------------
-DROP TABLE IF EXISTS `ban`;
-CREATE TABLE `ban` (
+DROP TABLE IF EXISTS `Ban`;
+CREATE TABLE `Ban` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AccountId` varchar(127) DEFAULT NULL,
   `Active` bit(1) NOT NULL,
@@ -129,14 +129,14 @@ CREATE TABLE `ban` (
   `SocialClub` varchar(24) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_Ban_AccountId` (`AccountId`),
-  CONSTRAINT `FK_Ban_AspNetUsers_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `aspnetusers` (`Id`) ON DELETE NO ACTION
+  CONSTRAINT `FK_Ban_AspNetUsers_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `character`
+-- Table structure for `Character`
 -- ----------------------------
-DROP TABLE IF EXISTS `character`;
-CREATE TABLE `character` (
+DROP TABLE IF EXISTS `Character`;
+CREATE TABLE `Character` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AccountId` varchar(127) DEFAULT NULL,
   `ActiveGroupID` int(11) NOT NULL,
@@ -158,14 +158,14 @@ CREATE TABLE `character` (
   `Rot` float NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_Character_AccountId` (`AccountId`),
-  CONSTRAINT `FK_Character_AspNetUsers_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `aspnetusers` (`Id`) ON DELETE NO ACTION
+  CONSTRAINT `FK_Character_AspNetUsers_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `group`
+-- Table structure for `Group`
 -- ----------------------------
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE `group` (
+DROP TABLE IF EXISTS `Group`;
+CREATE TABLE `Group` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ExtraType` int(11) NOT NULL,
   `Name` varchar(32) DEFAULT NULL,
@@ -174,10 +174,10 @@ CREATE TABLE `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `groupdivision`
+-- Table structure for `GroupDivision`
 -- ----------------------------
-DROP TABLE IF EXISTS `groupdivision`;
-CREATE TABLE `groupdivision` (
+DROP TABLE IF EXISTS `GroupDivision`;
+CREATE TABLE `GroupDivision` (
   `DivisionID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupID` int(11) NOT NULL,
   `Name` longtext,
@@ -186,10 +186,10 @@ CREATE TABLE `groupdivision` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `groupmember`
+-- Table structure for `GroupMember`
 -- ----------------------------
-DROP TABLE IF EXISTS `groupmember`;
-CREATE TABLE `groupmember` (
+DROP TABLE IF EXISTS `GroupMember`;
+CREATE TABLE `GroupMember` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `CharacterId` int(11) DEFAULT NULL,
   `GroupDivisionDivisionID` int(11) DEFAULT NULL,
@@ -201,17 +201,17 @@ CREATE TABLE `groupmember` (
   KEY `IX_GroupMember_GroupDivisionDivisionID` (`GroupDivisionDivisionID`),
   KEY `IX_GroupMember_GroupId` (`GroupId`),
   KEY `IX_GroupMember_GroupRankRankID` (`GroupRankRankID`),
-  CONSTRAINT `FK_GroupMember_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `character` (`Id`) ON DELETE NO ACTION,
-  CONSTRAINT `FK_GroupMember_GroupDivision_GroupDivisionDivisionID` FOREIGN KEY (`GroupDivisionDivisionID`) REFERENCES `groupdivision` (`DivisionID`) ON DELETE NO ACTION,
-  CONSTRAINT `FK_GroupMember_GroupRank_GroupRankRankID` FOREIGN KEY (`GroupRankRankID`) REFERENCES `grouprank` (`RankID`) ON DELETE NO ACTION,
-  CONSTRAINT `FK_GroupMember_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `group` (`Id`) ON DELETE NO ACTION
+  CONSTRAINT `FK_GroupMember_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `Character` (`Id`) ON DELETE NO ACTION,
+  CONSTRAINT `FK_GroupMember_GroupDivision_GroupDivisionDivisionID` FOREIGN KEY (`GroupDivisionDivisionID`) REFERENCES `GroupDivision` (`DivisionID`) ON DELETE NO ACTION,
+  CONSTRAINT `FK_GroupMember_GroupRank_GroupRankRankID` FOREIGN KEY (`GroupRankRankID`) REFERENCES `GroupRank` (`RankID`) ON DELETE NO ACTION,
+  CONSTRAINT `FK_GroupMember_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `Group` (`Id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `grouprank`
+-- Table structure for `GroupRank`
 -- ----------------------------
-DROP TABLE IF EXISTS `grouprank`;
-CREATE TABLE `grouprank` (
+DROP TABLE IF EXISTS `GroupRank`;
+CREATE TABLE `GroupRank` (
   `RankID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupID` int(11) NOT NULL,
   `Name` longtext,
@@ -221,10 +221,10 @@ CREATE TABLE `grouprank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `job`
+-- Table structure for `Job`
 -- ----------------------------
-DROP TABLE IF EXISTS `job`;
-CREATE TABLE `job` (
+DROP TABLE IF EXISTS `Job`;
+CREATE TABLE `Job` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `GroupId` int(11) DEFAULT NULL,
   `Level` int(11) NOT NULL,
@@ -234,14 +234,14 @@ CREATE TABLE `job` (
   `Type` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_Job_GroupId` (`GroupId`),
-  CONSTRAINT `FK_Job_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `group` (`Id`) ON DELETE NO ACTION
+  CONSTRAINT `FK_Job_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `Group` (`Id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `property`
+-- Table structure for `Property`
 -- ----------------------------
-DROP TABLE IF EXISTS `property`;
-CREATE TABLE `property` (
+DROP TABLE IF EXISTS `Property`;
+CREATE TABLE `Property` (
   `PropertyID` int(11) NOT NULL AUTO_INCREMENT,
   `CharacterId` int(11) DEFAULT NULL,
   `Enterable` bit(1) NOT NULL,
@@ -259,15 +259,15 @@ CREATE TABLE `property` (
   PRIMARY KEY (`PropertyID`),
   KEY `IX_Property_CharacterId` (`CharacterId`),
   KEY `IX_Property_GroupId` (`GroupId`),
-  CONSTRAINT `FK_Property_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `character` (`Id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_Property_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `group` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_Property_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `Character` (`Id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Property_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `Group` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for `vehicle`
+-- Table structure for `Vehicle`
 -- ----------------------------
-DROP TABLE IF EXISTS `vehicle`;
-CREATE TABLE `vehicle` (
+DROP TABLE IF EXISTS `Vehicle`;
+CREATE TABLE `Vehicle` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `CharacterId` int(11) DEFAULT NULL,
   `Color1` int(11) NOT NULL,
@@ -284,7 +284,7 @@ CREATE TABLE `vehicle` (
   KEY `IX_Vehicle_CharacterId` (`CharacterId`),
   KEY `IX_Vehicle_GroupId` (`GroupId`),
   KEY `IX_Vehicle_JobId` (`JobId`),
-  CONSTRAINT `FK_Vehicle_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `character` (`Id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_Vehicle_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `group` (`Id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_Vehicle_Job_JobId` FOREIGN KEY (`JobId`) REFERENCES `job` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_Vehicle_Character_CharacterId` FOREIGN KEY (`CharacterId`) REFERENCES `Character` (`Id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Vehicle_Group_GroupId` FOREIGN KEY (`GroupId`) REFERENCES `Group` (`Id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Vehicle_Job_JobId` FOREIGN KEY (`JobId`) REFERENCES `Job` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
