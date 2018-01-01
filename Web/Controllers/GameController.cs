@@ -51,7 +51,7 @@ namespace TheGodfatherGM.Web.Controllers
 
                 string json = JsonConvert.SerializeObject(jsonData);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3001/CreateCharacter", content);
+                var response = await client.PostAsync("http://74.139.128.254:3001/CreateCharacter", content);
                 var responseString = await response.Content.ReadAsStringAsync();
             }
         }
@@ -87,7 +87,7 @@ namespace TheGodfatherGM.Web.Controllers
             {
                 string json = JsonConvert.SerializeObject(jsonData);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3001/LoginAccount", content);
+                var response = await client.PostAsync("http://74.139.128.254:3001/LoginAccount", content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
             }

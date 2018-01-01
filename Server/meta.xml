@@ -8,7 +8,7 @@
     <setting name="web_server_port" value="5000" default="5000"/>
     <setting name="auth_listening_server" value="http://localhost" default="http://localhost"/>
     <setting name="auth_listening_port" value="3001" default="3001"/>
-    <setting name="web_rtc_server" value="http://localhost" default="http://localhost"/> <!-- WebRTC requires https when hosted -->
+    <setting name="web_rtc_server" value="http://74.139.128.254" default="http://localhost"/> <!-- WebRTC requires https when hosted -->
     <setting name="web_rtc_port" value="5000" default="5000"/>
     <setting name="database_server" value="localhost" default="localhost"/>
     <setting name="database_port" value="3306" default="3306" />

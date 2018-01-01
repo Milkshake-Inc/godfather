@@ -1,5 +1,7 @@
 ﻿using TheGodfatherGM.Data.Enums;
-using GTANetworkServer;
+using GrandTheftMultiplayer.Server.API;
+using GrandTheftMultiplayer.Server.Elements;
+using GrandTheftMultiplayer.Server.Managers;
 using TheGodfatherGM.Server.DBManager;
 using TheGodfatherGM.Server.User;
 using TheGodfatherGM.Server.Admin;

@@ -58,7 +58,7 @@ namespace TheGodfatherGM.Web.Controllers.Game.Group
             using (var client = new HttpClient())
             {
                 var content = new StringContent(JsonConvert.SerializeObject(createGroupMessage), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:3001/CreateGroup", content);
+                var response = await client.PostAsync("http://74.139.128.254:3001/CreateGroup", content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
             }

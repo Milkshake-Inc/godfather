@@ -31,7 +31,7 @@ namespace TheGodfatherGM.Web
             var connectionStringBuilder = new MySql.Data.MySqlClient.MySqlConnectionStringBuilder
             {
                 Server = "localhost",
-                UserID = "godfather",
+                UserID = "root",
                 Password = "",
                 Database = "godfather",
                 ConvertZeroDateTime = true

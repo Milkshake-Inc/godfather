@@ -10,6 +10,7 @@ namespace TheGodfatherGM.Web
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://74.139.128.254:5000", "http://*:5000")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
